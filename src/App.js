@@ -3,52 +3,44 @@ import From from './components/form/From';
 import ListTasks from './components/list/ListTasks';
 
 import classes from './App.module.scss'
+import Loader from './components/Loader';
 
 function App() {
 
-  const [tasks, setTasks] = React.useState([
-    {
-      id: 1,
-      text: 'Купить хлеб',
-      done: false,
-      createAt: new Date().toLocaleString('ru')
-    },
-    {
-      id: 2,
-      text: 'Купить молоко',
-      done: false,
-      createAt: new Date().toLocaleString('ru')
-    },
-    {
-      id: 3,
-      text: 'Купить Кефир',
-      done: false,
-      createAt: new Date().toLocaleString('ru')
-    }
-  ])
-
-  console.log(tasks)
-
+  const [tasks, setTasks] = React.useState([])
   const [searchValue, setSearchValue] = React.useState('')
+  const [isLoaded, setIsLoaded] = React.useState(true)
+
+  React.useEffect(() => {
+    fetch('https://61753daa08834f0017c70b7f.mockapi.io/tasks')
+      .then(res => res.json())
+      .then(res => {
+        setTasks(res)
+        setIsLoaded(false)
+      })
+      
+  }, [])
+
+  
 
   const addTask = (newTask) => {
-    setTasks([newTask, ...tasks])
+    fetch('https://61753daa08834f0017c70b7f.mockapi.io/tasks', {
+        method: 'POST',
+        body: JSON.stringify(newTask),
+        headers: {
+          'Content-Type' : 'application/json'
+        }
+    }).then(setTasks([...tasks, newTask]))
   }
 
   const deleteTask = (id) => {
-    setTasks(tasks.filter(task => task.id !== id))
+    fetch(`https://61753daa08834f0017c70b7f.mockapi.io/tasks?id=${id}`, {
+        method: 'DELETE'
+    }).then(setTasks(tasks.filter(task => task.id !== id)))
   }
 
   const doneTask = (id) => {
-
-    tasks.map(task => {
-      if(task.id === id){
-        task.done = task.done ? false : true
-      }
-      return null
-    })
-
-    setTasks([...tasks])
+    setTasks(tasks.map(task => task.id === id ? ({...task, done: !task.done}) : task))
   }
 
   return (
@@ -68,16 +60,26 @@ function App() {
         />
       </div>
       <div className={classes.AppInner}>
-        <From onClickTask={addTask} />
-        <ListTasks 
-          searchValue={searchValue} 
-          data={tasks} 
-          onClickDelete={deleteTask}
-          doneTask={doneTask}
-        />
+        {
+          isLoaded ? (
+            <Loader />
+          ) : (
+            <>
+            <From onClickTask={addTask} />
+              <ListTasks 
+                searchValue={searchValue} 
+                data={tasks} 
+                onClickDelete={deleteTask}
+                doneTask={doneTask}
+              />
+          </>
+          )
+        }
+        
       </div>
     </div>
   );
 }
+
 
 export default App;

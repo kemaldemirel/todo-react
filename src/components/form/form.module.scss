@@ -30,4 +30,10 @@
       cursor: pointer;
     }
   }
+
+  &Error{
+    display: inline-block;
+    padding: 5px 0;
+    color:rgb(211, 97, 97);
+  }
 }

@@ -1,12 +1,13 @@
 import React from 'react'
 import classes from './list.module.scss'
 
-const ListItem = ({id, index, createAt ,text, doneTask, onClickDelete, done}) => {
+
+const ListItem = ({id, index, text, doneTask, onClickDelete, done}) => {
   return (
     <li key={id} className={done ? classes.ListTasksDone : ''}>
       <p>
         {text}
-        <span>Создана: {createAt.toLocaleString('ru')}</span>
+        {/* <span>Создана: {createAt.toLocaleString('ru', optionsDate)}</span> */}
       </p>
       <div>
         <button onClick={() => doneTask(id, index)} className={classes.ListTasksDoneBtn}>Done</button>

@@ -41,7 +41,12 @@
 
   &Done{
     text-decoration: line-through;
-    color: #ccc;
+    p{
+      color: #ccc;
+      span{
+        color: #ccc;
+      }
+    }
   }
 
   button{
