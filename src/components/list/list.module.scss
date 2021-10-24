@@ -1,0 +1,74 @@
+.ListTasks{
+  margin: 0;
+  padding: 15px;
+  list-style: none;
+
+  li{
+    width: 100%;
+    padding: 10px 0;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+
+    &:not(:last-child){
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgb(223, 221, 221);
+    }
+
+    p{
+      margin: 0;
+      margin-bottom: 5px;
+      display: flex;
+      flex-direction: column;
+
+      @media (max-width: 360px) { 
+        font-size: 20px;
+      }
+
+      span{
+        font-size: 10px;
+        color: rgb(99, 99, 99);
+      }
+    }
+
+    @media (max-width: 360px) { 
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &Done{
+    text-decoration: line-through;
+    color: #ccc;
+  }
+
+  button{
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+
+    &:not(:last-child){
+      margin-right: 5px;
+    }
+  }
+
+  &DoneBtn{
+    background-color: rgb(22, 185, 185);
+    transition: all .3s ease;
+    &:hover{
+      background-color: rgba(22, 185, 185, .8);
+    }
+  }
+
+  &DeleteBtn{
+    background-color: rgb(247, 105, 105);
+    transition: all .3s ease;
+    &:hover{
+      background-color: rgb(230, 91, 91);
+    }
+  }
+}

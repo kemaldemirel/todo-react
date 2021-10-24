@@ -1,0 +1,33 @@
+.Form{
+  width: 100%;
+
+  &Label{
+    display: block;
+    position: relative;
+    width: 100%;
+  }
+  
+  &Input{
+    width: 100%;
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: rgb(83, 83, 83);
+  }
+  
+  &Btn{
+    position: absolute;
+    padding: 10;
+    top: 7px;
+    right: 15px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    transition: color .3s ease;
+    color: #ccc;
+    &:hover{
+      color: rgb(211, 97, 97);
+      cursor: pointer;
+    }
+  }
+}
