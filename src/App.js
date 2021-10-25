@@ -1,9 +1,15 @@
 import React from 'react';
 import From from './components/form/From';
 import ListTasks from './components/list/ListTasks';
+import Navigation from './components/navigation/Navigation';
+import Loader from './components/Loader';
+import Comleted from './pages/Comleted';
+import Deleted from './pages/Deleted';
+
+import { Switch,Route } from 'react-router-dom'
 
 import classes from './App.module.scss'
-import Loader from './components/Loader';
+
 
 function App() {
 
@@ -58,38 +64,50 @@ function App() {
 
   return (
     <div className={classes.App}>
-      <div className={classes.AppHeader}>
-        <h1>
-          Список задач 
-          <span>
-            {tasks.length}
-          </span>
-        </h1>
-        <input
-          value={searchValue} 
-          type="text" 
-          placeholder="Поиск.."
-          onChange={(e) => setSearchValue(e.target.value)}
-        />
-      </div>
-      <div className={classes.AppInner}>
-        {
-          isLoaded ? (
-            <Loader />
-          ) : (
-            <>
-            <From onClickTask={addTask} />
-              <ListTasks 
-                searchValue={searchValue} 
-                data={tasks} 
-                onClickDelete={deleteTask}
-                doneTask={doneTask}
+
+        <Switch>
+          <Route path="/" exact>
+          <div className={classes.AppHeader}>
+              <h1>
+                Список задач 
+              </h1>
+              <input
+                value={searchValue} 
+                type="text" 
+                placeholder="Поиск.."
+                onChange={(e) => setSearchValue(e.target.value)}
               />
-          </>
-          )
-        }
-        
-      </div>
+            </div>
+
+            <Navigation />
+
+            <div className={classes.AppInner}>
+              {
+                isLoaded ? (
+                  <Loader />
+                ) : (
+                  <>
+                  <From onClickTask={addTask} />
+                    <ListTasks 
+                      searchValue={searchValue} 
+                      data={tasks} 
+                      onClickDelete={deleteTask}
+                      doneTask={doneTask}
+                    />
+                </>
+                )
+              }
+              
+            </div>
+          </Route>
+          <Route path="/completed">
+            <Comleted />
+          </Route>
+          <Route path="/deleted" >
+            <Deleted />
+          </Route>
+        </Switch>
+
     </div>
   );
 }

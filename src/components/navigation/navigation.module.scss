@@ -1,0 +1,28 @@
+.App{
+  &Nav{
+    display: flex;
+    padding: 10px;
+    margin: 0;
+    list-style: none;
+    background-color: #D36161;
+
+    &Item{
+      &:not(:last-child){
+        margin-right: 10px;
+      }
+      a{
+        text-decoration: none;
+        color: #f1f1f1;
+      }
+    }
+
+    &Count{
+      display: inline-block;
+      padding: 5px 10px;
+      margin-left: 5px;
+      background-color: #fff;
+      border-radius: 5px;
+      font-size: 10px;
+    }
+  }
+}
