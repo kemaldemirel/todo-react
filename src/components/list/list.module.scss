@@ -69,6 +69,15 @@
     }
   }
 
+  &DesabledBtn{
+    cursor: default;
+    background-color: #ccc;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
   &DeleteBtn{
     background-color: rgb(247, 105, 105);
     transition: all .3s ease;

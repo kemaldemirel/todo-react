@@ -21,7 +21,7 @@ const From = ({onClickTask}) => {
   const handleClick = (data) => {
     const newTask = {
       text: data.textTask,
-      createAt: new Date()
+      done: false
     }
     onClickTask(newTask)
     reset({

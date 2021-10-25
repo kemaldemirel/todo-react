@@ -15,6 +15,7 @@ function App() {
     fetch('https://61753daa08834f0017c70b7f.mockapi.io/tasks')
       .then(res => res.json())
       .then(res => {
+        res.reverse()
         setTasks(res)
         setIsLoaded(false)
       })
@@ -30,17 +31,29 @@ function App() {
         headers: {
           'Content-Type' : 'application/json'
         }
-    }).then(setTasks([...tasks, newTask]))
+    }).then(res => res.json()).then(res => setTasks([res, ...tasks]))
   }
 
   const deleteTask = (id) => {
-    fetch(`https://61753daa08834f0017c70b7f.mockapi.io/tasks?id=${id}`, {
+    fetch(`https://61753daa08834f0017c70b7f.mockapi.io/tasks/${id}`, {
         method: 'DELETE'
     }).then(setTasks(tasks.filter(task => task.id !== id)))
   }
 
   const doneTask = (id) => {
-    setTasks(tasks.map(task => task.id === id ? ({...task, done: !task.done}) : task))
+    const [taskDone] = tasks.filter(task => task.id === id)
+    const done = !taskDone.done
+
+    fetch(`https://61753daa08834f0017c70b7f.mockapi.io/tasks/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          done: done
+        }),
+        headers:{
+          'Content-Type': 'application/json'
+        }
+    }).then( setTasks(tasks.map(task => task.id === id ? ({...task, done: done}) : task)))
+   
   }
 
   return (

@@ -1,4 +1,5 @@
 import React from 'react'
+import AllInboxIcon from '@mui/icons-material/AllInboxTwoTone';
 import ListItem from './ListItem'
 import classes from './list.module.scss'
 
@@ -23,7 +24,10 @@ const ListTasks = ({ data, onClickDelete, searchValue, doneTask }) => {
             }
           </ul>
         ) : (
-          <div style={{padding: '20px 40px', color: '#ccc'}}>Список пустой</div>
+          <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '20px 40px', color: '#ccc'}}>
+            <AllInboxIcon sx={{fontSize: '60px'}} />
+           <span style={{fontSize: '20px'}}>Список пустой</span>
+          </div>
         )
       }
     </>
