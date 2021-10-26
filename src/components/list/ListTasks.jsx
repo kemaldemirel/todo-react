@@ -12,7 +12,7 @@ const ListTasks = ({ data, onClickDelete, searchValue, doneTask }) => {
           <ul className={classes.ListTasks}>
             {
               data.filter(task => task.text.toLowerCase().includes(searchValue.toLowerCase()))
-                .map((task, index) =>
+                .map((task) =>
                   <ListItem
                     key={task.id}
                     {...task}
@@ -24,9 +24,9 @@ const ListTasks = ({ data, onClickDelete, searchValue, doneTask }) => {
             }
           </ul>
         ) : (
-          <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '20px 40px', color: '#ccc'}}>
-            <AllInboxIcon sx={{fontSize: '60px'}} />
-           <span style={{fontSize: '20px'}}>Список пустой</span>
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '20px 40px', color: '#ccc' }}>
+            <AllInboxIcon sx={{ fontSize: '60px' }} />
+            <span style={{ fontSize: '20px' }}>Список пустой</span>
           </div>
         )
       }
