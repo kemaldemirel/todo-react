@@ -4,11 +4,11 @@ import {
 } from "react-router-dom";
 import classes from './navigation.module.scss'
 
-const Navigation = ({tasks}) => {
+const Navigation = ({ tasks }) => {
   return (
     <ul className={classes.AppNav}>
       <li className={classes.AppNavItem}>
-        <Link to="/">Текущие</Link>
+        <Link to="/todo-react">Текущие</Link>
         <span className={classes.AppNavCount}>{tasks.filter(task => task.done !== true).length}</span>
       </li>
       <li className={classes.AppNavItem}>

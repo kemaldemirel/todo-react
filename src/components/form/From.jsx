@@ -8,13 +8,13 @@ import classes from './form.module.scss'
 
 const schema = yup.object({
   textTask: yup.string()
-            .min(5, 'Задача должна быть не менее 5 символов')
-            .max(30, 'Задача должна быть не более 30 символов')
+    .min(5, 'Задача должна быть не менее 5 символов')
+    .max(30, 'Задача должна быть не более 30 символов')
 })
 
-const From = ({onClickTask}) => {
+const From = ({ onClickTask }) => {
 
-  const { register, handleSubmit, formState:{ errors }, reset } = useForm({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema)
   });
 

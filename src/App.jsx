@@ -74,7 +74,7 @@ function App() {
       <Navigation tasks={tasks} />
 
       <Switch>
-        <Route path="/" exact>
+        <Route path="/todo-react" exact>
           <Home
             isLoaded={isLoaded}
             addTask={addTask}

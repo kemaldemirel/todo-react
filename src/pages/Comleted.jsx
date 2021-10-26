@@ -25,12 +25,12 @@ const Comleted = ({ tasks }) => {
               }
             </ul>
           ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '20px 40px', color: '#ccc' }}>
-          <AllInboxIcon sx={{ fontSize: '60px' }} />
-          <span style={{ fontSize: '20px' }}>Список пустой</span>
-        </div>
-        )
-      }
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '20px 40px', color: '#ccc' }}>
+              <AllInboxIcon sx={{ fontSize: '60px' }} />
+              <span style={{ fontSize: '20px' }}>Список пустой</span>
+            </div>
+          )
+        }
 
       </div>
     </>

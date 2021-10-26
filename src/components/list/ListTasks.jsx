@@ -6,8 +6,8 @@ import classes from './list.module.scss'
 const ListTasks = ({ data, onClickDelete, searchValue, doneTask }) => {
 
   const filteredData = data
-                      .filter(task => task.text.toLowerCase().includes(searchValue.toLowerCase()))
-                      .filter(task => task.done !== true)
+    .filter(task => task.text.toLowerCase().includes(searchValue.toLowerCase()))
+    .filter(task => task.done !== true)
 
   return (
     <>

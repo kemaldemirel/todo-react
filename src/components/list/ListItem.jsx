@@ -8,7 +8,7 @@ let options = {
   minute: 'numeric',
 };
 
-const ListItem = ({id, createAt, text, done, doneTask, onClickDelete}) => {
+const ListItem = ({ id, createAt, text, done, doneTask, onClickDelete }) => {
 
   const date = new Date(createAt)
 
@@ -19,9 +19,9 @@ const ListItem = ({id, createAt, text, done, doneTask, onClickDelete}) => {
         {<span>Создана: {date.toLocaleString('ru', options)}</span>}
       </p>
       <div>
-        <button 
-          onClick={() => 
-          doneTask(id)} 
+        <button
+          onClick={() =>
+            doneTask(id)}
           className={classes.ListTasksDoneBtn}
         >Done</button>
         <button onClick={() => onClickDelete(id)} className={classes.ListTasksDeleteBtn}>Delete</button>
