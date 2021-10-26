@@ -1,7 +1,6 @@
 import React from 'react';
 import Navigation from './components/navigation/Navigation';
 import Comleted from './pages/Comleted';
-import Deleted from './pages/Deleted';
 
 import { Switch, Route } from 'react-router-dom'
 
@@ -12,7 +11,6 @@ import Home from './pages/Home';
 function App() {
 
   const [tasks, setTasks] = React.useState([])
-  const [completedTasks, setCompletedTasks] = React.useState([])
   const [searchValue, setSearchValue] = React.useState('')
   const [isLoaded, setIsLoaded] = React.useState(true)
 
@@ -24,9 +22,6 @@ function App() {
         setTasks(res)
         setIsLoaded(false)
       })
-      .then(fetch(`https://61753daa08834f0017c70b7f.mockapi.io/doneTasks`)
-      .then(res => res.json())
-      .then(res => setCompletedTasks([...res])))
   }, [])
 
   console.log(tasks)
@@ -47,25 +42,20 @@ function App() {
     }).then(setTasks(tasks.filter(task => task.id !== id)))
   }
 
-  const doneTask = async (id) => {
-    const response = await fetch(`https://61753daa08834f0017c70b7f.mockapi.io/tasks/${id}`, {
-      method: 'DELETE',
-    })
-    
-    const task = await response.json()
-    await setCompletedTasks([...completedTasks, {...task, doneDate: Date.now()}])
-    await setTasks(tasks.filter(task => task.id !== id))
+  const doneTask = (id) => {
+    const [doneTask] = tasks.filter(task => task.id === id)
 
-    await fetch(`https://61753daa08834f0017c70b7f.mockapi.io/doneTasks`, {
-      method: 'POST',
+    fetch(`https://61753daa08834f0017c70b7f.mockapi.io/tasks/${id}`, {
+      method: 'PUT',
       body: JSON.stringify({
-        ...task,
+        done: !doneTask.done,
         doneDate: Date.now()
       }),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-type': 'application/json'
       }
-    })
+    }).then(res => res.json())
+      .then(setTasks(tasks.map(task => task.id === id ? ({ ...task, done: !doneTask.done, doneDate: Date.now() }) : task)))
   }
 
   return (
@@ -81,13 +71,13 @@ function App() {
           onChange={(e) => setSearchValue(e.target.value)}
         />
       </div>
-      <Navigation tasks={tasks} completedTasks={completedTasks} />
+      <Navigation tasks={tasks} />
 
       <Switch>
         <Route path="/" exact>
-          <Home 
-            isLoaded={isLoaded} 
-            addTask={addTask} 
+          <Home
+            isLoaded={isLoaded}
+            addTask={addTask}
             searchValue={searchValue}
             tasks={tasks}
             deleteTask={deleteTask}
@@ -95,10 +85,7 @@ function App() {
           />
         </Route>
         <Route path="/completed">
-          <Comleted completedTasks={completedTasks} setCompletedTasks={setCompletedTasks}/>
-        </Route>
-        <Route path="/deleted" >
-          <Deleted />
+          <Comleted tasks={tasks} />
         </Route>
       </Switch>
 

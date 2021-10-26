@@ -5,22 +5,25 @@ import classes from './list.module.scss'
 
 const ListTasks = ({ data, onClickDelete, searchValue, doneTask }) => {
 
+  const filteredData = data
+                      .filter(task => task.text.toLowerCase().includes(searchValue.toLowerCase()))
+                      .filter(task => task.done !== true)
+
   return (
     <>
       {
-        data.length > 0 ? (
+        filteredData.length > 0 ? (
           <ul className={classes.ListTasks}>
             {
-              data.filter(task => task.text.toLowerCase().includes(searchValue.toLowerCase()))
-                .map((task) =>
-                  <ListItem
-                    key={task.id}
-                    {...task}
-                    onClickDelete={onClickDelete}
-                    done={task.done}
-                    doneTask={doneTask}
-                  />
-                )
+              filteredData.map((task) =>
+                <ListItem
+                  key={task.id}
+                  {...task}
+                  onClickDelete={onClickDelete}
+                  done={task.done}
+                  doneTask={doneTask}
+                />
+              )
             }
           </ul>
         ) : (

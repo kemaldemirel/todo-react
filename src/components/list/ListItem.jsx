@@ -8,7 +8,7 @@ let options = {
   minute: 'numeric',
 };
 
-const ListItem = ({id, index, createAt, text, doneTask, onClickDelete}) => {
+const ListItem = ({id, createAt, text, done, doneTask, onClickDelete}) => {
 
   const date = new Date(createAt)
 
@@ -21,7 +21,7 @@ const ListItem = ({id, index, createAt, text, doneTask, onClickDelete}) => {
       <div>
         <button 
           onClick={() => 
-          doneTask(id, index)} 
+          doneTask(id)} 
           className={classes.ListTasksDoneBtn}
         >Done</button>
         <button onClick={() => onClickDelete(id)} className={classes.ListTasksDeleteBtn}>Delete</button>
